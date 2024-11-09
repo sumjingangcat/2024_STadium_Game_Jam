@@ -15,12 +15,12 @@ public class RandomPot : MonoBehaviour {
     void Start() {
         maxVertices = col2D.points.Length;
         colVerticies = col2D.points;
-        Debug.Log($"col2D : {maxVertices}");
+        /*Debug.Log($"col2D : {maxVertices}");
         for (int i = 0; i < maxVertices; i++) {
-            GetRandomInnerPosition(i);
-        }
+            GetRandomInnerPosition();
+        }*/
         
-        drawPositionArray(col2D.points);
+        // drawPositionArray(col2D.points);
     }
 
     private void drawPositionArray(Vector2[] arr) {
@@ -29,8 +29,8 @@ public class RandomPot : MonoBehaviour {
         }
     }
     
-    public Vector2 GetRandomInnerPosition(int seed = 0) { 
-        Random.seed = seed;
+    public Vector2 GetRandomInnerPosition() { 
+        Random.seed = (int)Time.time;
         int rnd_num = Random.Range(0, maxVertices);
         
         Vector2 start = colVerticies[rnd_num];
@@ -42,8 +42,8 @@ public class RandomPot : MonoBehaviour {
         Vector2 find_in_circle = find + Random.insideUnitCircle;
         
         // Debug Section
-        Debug.Log($"rnd_num : {rnd_num}, rate : {find_rate}, find position : {find}");
-        Instantiate(checkingStar, find, Quaternion.identity);
+        /*Debug.Log($"rnd_num : {rnd_num}, rate : {find_rate}, find position : {find}");
+        Instantiate(checkingStar, find, Quaternion.identity);*/
         
         return find;
     }
