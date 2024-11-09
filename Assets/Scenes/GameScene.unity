@@ -328,7 +328,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   holeManager: {fileID: 1931948490}
-  clickDistanceThreshold: 1
+  clickDistanceThreshold: 0.05
 --- !u!4 &855884371
 Transform:
   m_ObjectHideFlags: 0
@@ -754,8 +754,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   potObject: {fileID: 1256829480}
   holes: []
-  maximumTime: 1
-  minimumTime: 1
+  maximumTime: 10
+  minimumTime: 10
   holeObject: {fileID: 5794946335958527400, guid: cf140bece4088b148b12b1f2caeb83a1, type: 3}
 --- !u!4 &1931948491
 Transform:

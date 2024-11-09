@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeDuration: 3
-  blockedSprite: {fileID: 0}
+  blockedSprite: {fileID: 21300000, guid: 6f7162f99ec07344e8e733c340fabadc, type: 3}
   waterSprite1: {fileID: 21300000, guid: 746b274a2ab836e4c9684599819f9ad7, type: 3}
   waterSprite2: {fileID: 21300000, guid: e467316e52578b04488dc91c7b56ae54, type: 3}
   spriteScale: {x: 0.3, y: 0.3, z: 1}
