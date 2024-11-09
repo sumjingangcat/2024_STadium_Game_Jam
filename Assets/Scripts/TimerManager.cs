@@ -7,7 +7,7 @@ public class TimerManager : MonoBehaviour
 {
     public Image timerBar;
 
-    private float totalTime = 60.0f;
+    [SerializeField] private float totalTime = 60.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -17,6 +17,14 @@ public class TimerManager : MonoBehaviour
 
     // Update is called once per frame
     void Update()
+    {
+        if (!PauseMenu.isPaused)
+        {
+            UpdateTimer();
+        }
+    }
+
+    private void UpdateTimer()
     {
         if (timerBar.fillAmount < 1) { timerBar.fillAmount += Time.deltaTime / totalTime; }
         else { Debug.Log("Zero"); }

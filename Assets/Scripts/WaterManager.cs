@@ -8,8 +8,8 @@ public class WaterManager : MonoBehaviour
     public Image waterBar;
 
     private HoleManager holeManager;
-    private float inputWater = 0.005f;
-    private float holeWater = 0.005f;
+    [SerializeField] private float inputWater = 0.005f;
+    [SerializeField] private float holeWater = 0.005f;
 
     // Start is called before the first frame update
     void Start()
