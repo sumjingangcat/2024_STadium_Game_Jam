@@ -57,6 +57,7 @@ public class HoleController : MonoBehaviour, IHole
     
     private void OnDestroy()
     {
+        GameObject.Find("HoleManager").GetComponent<HoleManager>().holes.Remove(gameObject);
         ChangeSprite();
         StartCoroutine(FadeAnimation());
     }
