@@ -11,7 +11,7 @@ public class CursorController : MonoBehaviour
     [SerializeField] private float clickDistanceThreshold;
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !PauseMenu.isPaused)
         {
             // left click
             float minDis = -1f;

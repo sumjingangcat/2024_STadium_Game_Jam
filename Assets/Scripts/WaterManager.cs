@@ -21,6 +21,14 @@ public class WaterManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!PauseMenu.isPaused)
+        {
+            updateWaterBar();
+        }
+    }
+
+    private void updateWaterBar()
+    {
         waterBar.fillAmount += inputWater;
 
         if (waterBar.fillAmount > 0) { waterBar.fillAmount -= holeManager.holes.Count * holeWater; }
