@@ -5,23 +5,20 @@ using UnityEngine.UI;
 
 public class TimerManager : MonoBehaviour
 {
-    public Slider timerSlider;
+    public Image timerBar;
 
-    private float stageTime = 60.0f;
-
+    private float totalTime = 60.0f;
 
     // Start is called before the first frame update
     void Start()
     {
-        timerSlider = GetComponent<Slider>();
-        timerSlider.maxValue = stageTime;
-        timerSlider.value = timerSlider.maxValue;
+        timerBar.fillAmount = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (timerSlider.value > 0) { timerSlider.value -= Time.deltaTime; }
+        if (timerBar.fillAmount < 1) { timerBar.fillAmount += Time.deltaTime / totalTime; }
         else { Debug.Log("Zero"); }
     }
 }
