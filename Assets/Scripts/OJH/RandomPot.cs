@@ -23,8 +23,7 @@ public class RandomPot : MonoBehaviour {
         return new Vector2(vec3.x, vec3.y);
     }
     
-    public Vector2 GetRandomInnerPosition() { 
-        Random.seed = (int)Time.time;
+    public Vector2 GetRandomInnerPosition() {
         Vector2 find = dropZVector2(center.position) + Random.insideUnitCircle * radius;
         return find;
     }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class WaterManager : MonoBehaviour
@@ -9,7 +10,7 @@ public class WaterManager : MonoBehaviour
 
     private HoleManager holeManager;
     [SerializeField] private float inputWater = 0.005f;
-    [SerializeField] private float holeWater = 0.005f;
+    [SerializeField] private float waterLossPerHole = 0.005f;
 
     // Start is called before the first frame update
     void Start()
@@ -29,9 +30,9 @@ public class WaterManager : MonoBehaviour
 
     private void updateWaterBar()
     {
-        waterBar.fillAmount += inputWater;
+        waterBar.fillAmount += inputWater * Time.deltaTime;
 
-        if (waterBar.fillAmount > 0) { waterBar.fillAmount -= holeManager.holes.Count * holeWater; }
+        if (waterBar.fillAmount > 0) { waterBar.fillAmount -= holeManager.holes.Count * waterLossPerHole * Time.deltaTime; }
         else { Debug.Log("Zero"); }
     }
 }
