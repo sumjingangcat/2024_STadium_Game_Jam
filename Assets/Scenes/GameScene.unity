@@ -327,6 +327,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30317deb568390241adae086fbe04474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  holeManager: {fileID: 1931948490}
+  clickDistanceThreshold: 1
 --- !u!4 &855884371
 Transform:
   m_ObjectHideFlags: 0

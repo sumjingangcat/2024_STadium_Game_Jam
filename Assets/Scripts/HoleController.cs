@@ -3,10 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HoleController : MonoBehaviour, IHole
+public class HoleController : MonoBehaviour
 {
     [SerializeField] private float fadeDuration;
-    [SerializeField] private float fadeRate;
 
     [Header("Sprites")] [SerializeField] private Sprite blockedSprite;
     [SerializeField] private Sprite waterSprite1;
@@ -18,10 +17,13 @@ public class HoleController : MonoBehaviour, IHole
     private float _timer;
 
     [SerializeField] private SpriteRenderer _mySpriteRenderer;
+
+    private bool isBlocked;
     
     void Start()
     {
         transform.localScale = spriteScale;
+        isBlocked = false;
     }
 
     void Update()
@@ -42,7 +44,10 @@ public class HoleController : MonoBehaviour, IHole
 
     private void SwapSprite()
     {
-        Debug.Log("swap");
+        if (isBlocked)
+        {
+            return;
+        }
         if (isWater1)
         {
             _mySpriteRenderer.sprite = waterSprite2;
@@ -54,9 +59,10 @@ public class HoleController : MonoBehaviour, IHole
             isWater1 = !isWater1;
         }
     }
-    
-    private void OnDestroy()
+
+    public void DestroyWithAnimation()
     {
+        isBlocked = true;
         GameObject.Find("HoleManager").GetComponent<HoleManager>().holes.Remove(gameObject);
         ChangeSprite();
         StartCoroutine(FadeAnimation());
@@ -70,23 +76,15 @@ public class HoleController : MonoBehaviour, IHole
     IEnumerator FadeAnimation()
     {
         float time = 0f;
-        float alphaValue;
         Color tmp;
 
         while (time < fadeDuration)
         {
-            alphaValue = _mySpriteRenderer.color.a;
-            alphaValue -= fadeRate;
             tmp = _mySpriteRenderer.color;
-            tmp.a = alphaValue;
+            tmp.a = 1 - time/fadeDuration;
             _mySpriteRenderer.color = tmp;
             time += Time.deltaTime;
             yield return null;
         }
     }
-}
-
-public interface IHole
-{
-    public void SetPosition(Vector2 pos);
 }

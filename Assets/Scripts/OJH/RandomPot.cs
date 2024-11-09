@@ -29,8 +29,7 @@ public class RandomPot : MonoBehaviour {
         }
     }
     
-    public Vector2 GetRandomInnerPosition() { 
-        Random.seed = (int)Time.time;
+    public Vector2 GetRandomInnerPosition() {
         int rnd_num = Random.Range(0, maxVertices);
         
         Vector2 start = colVerticies[rnd_num];

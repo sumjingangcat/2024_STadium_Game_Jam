@@ -21,7 +21,7 @@ public class HoleManager : MonoBehaviour
     {
         Vector2 holePos = potObject.GetRandomInnerPosition();
         GameObject newHole = Instantiate(holeObject, transform);
-        newHole.GetComponent<IHole>().SetPosition(holePos);
+        newHole.GetComponent<HoleController>().SetPosition(holePos);
         if (newHole.transform.position.x < potObject.transform.position.x)
         {
             newHole.GetComponent<SpriteRenderer>().flipX = true;
