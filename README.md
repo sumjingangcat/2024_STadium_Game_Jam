@@ -9,7 +9,7 @@
 
 1. 프로젝트 관리 : GitHub, monday.com
 2. 커뮤니케이션 : Discord
-3. 개발환경 : Unity
+3. 개발환경 : Unity 2022.3.40f1
 
 
 ## :fountain_pen: Authors
