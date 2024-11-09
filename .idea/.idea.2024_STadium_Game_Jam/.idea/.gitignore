@@ -6,7 +6,8 @@
 /projectSettingsUpdater.xml
 /modules.xml
 /contentModel.xml
-.idea/*
+/.idea/*
+.idea/.idea.2024_STadium_Game_Jam/.idea/vcs.xml
 # Editor-based HTTP Client requests
 /httpRequests/
 # Datasource local storage ignored files
