@@ -1,12 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Spear;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
-public class HoleManager : MonoBehaviour
-{
+public class HoleManager : MonoBehaviour {
+    [SerializeField] private float breakSoundVolume = 1f;
+    [SerializeField] private float waterFlowSoundVolume = 0.5f;
     [SerializeField] private RandomPot potObject;
     [SerializeField] private WaterManager waterManager;
     public List<GameObject> holes;
@@ -33,6 +35,9 @@ public class HoleManager : MonoBehaviour
         holes.Add(newHole);
         ValidateHoles();
         newHole.SetActive(true);
+        
+        // Sound Effects
+        SoundManager.Instance.PlaySoundQueue("Decorated_pot_shatter", true, breakSoundVolume);
     }
 
     private void ValidateHoles()

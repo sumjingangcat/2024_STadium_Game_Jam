@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Spear;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -11,6 +12,11 @@ public class WaterManager : MonoBehaviour
     private HoleManager holeManager;
     [SerializeField] private float inputWater = 0.005f;
     [SerializeField] private float waterLossPerHole = 0.005f;
+
+    private bool waterSoundStartFlag = false;
+    private bool waterSoundEndFlag = true;
+    private string waterFlowSEName = "running-stream-water-sound";
+    private float waterFlowSoundVolume = 0.1f;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +31,7 @@ public class WaterManager : MonoBehaviour
         if (!PauseMenu.isPaused)
         {
             updateWaterBar();
+            updateWaterFlowSound(holeManager.activeHoles.Count);
         }
     }
 
@@ -32,7 +39,30 @@ public class WaterManager : MonoBehaviour
     {
         waterBar.fillAmount += inputWater * Time.deltaTime;
 
-        if (waterBar.fillAmount > 0) { waterBar.fillAmount -= holeManager.activeHoles.Count * waterLossPerHole * Time.deltaTime; }
+        if (waterBar.fillAmount > 0) {
+            float waterLoss = holeManager.activeHoles.Count * waterLossPerHole;
+            waterBar.fillAmount -= waterLoss * Time.deltaTime;
+        }
         else { Debug.Log("Zero"); }
+    }
+
+    private void updateWaterFlowSound(float activeHolesCount)
+    {
+        if (activeHolesCount > 0) {
+            if (waterSoundEndFlag) {
+                waterSoundStartFlag = true;
+                waterSoundEndFlag = false;
+            }
+        }
+        else {
+            SoundManager.Instance.StopSoundQueue(waterFlowSEName);
+            waterSoundEndFlag = true;
+        }
+        
+        if (waterSoundStartFlag)
+        {
+            SoundManager.Instance.PlaySoundQueue(waterFlowSEName, false, activeHolesCount * waterFlowSoundVolume);
+            waterSoundStartFlag = false;
+        }
     }
 }

@@ -35,5 +35,10 @@ namespace Spear
             }
         }
 
+        public void StopSound() {
+            audioSources[_next].Stop();
+            audioSources[_next].time = 0f;
+        }
+
     } //SoundQueue End
 }

@@ -44,6 +44,17 @@ namespace Spear
             }
         }
 
+        public void StopSoundQueue(string name) {
+            if (soundQueuesByName.TryGetValue(name, out SoundQueue soundQueue))
+            {
+                soundQueue.StopSound();
+            }
+            else
+            {
+                Debug.Log($"SoundQueue {name} not found!");
+            }
+        }
+
         public void PlaySoundPool(string name, float volume = 1f) {
             if (soundPoolsByName.TryGetValue(name, out SoundPool soundPool))
             {
