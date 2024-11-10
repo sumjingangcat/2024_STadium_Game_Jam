@@ -37,7 +37,7 @@ public class TimerManager : MonoBehaviour
     private void UpdateTimer()
     {
         if (timerBar.fillAmount < 1) { timerBar.fillAmount += Time.deltaTime / totalTime; }
-        else { Debug.Log("Zero"); }
+        else { GameObject.FindObjectOfType<ClearManager>().CheckClear(); }
     }
 
     private IEnumerator UpdateSpawnRate()
