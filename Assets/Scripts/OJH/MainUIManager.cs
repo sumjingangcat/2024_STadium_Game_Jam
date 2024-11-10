@@ -10,11 +10,12 @@ public class MainUIManager : MonoBehaviour {
 
     [SerializeField] private string mainSceneName;
     [SerializeField] private GameObject developerCut;
-    
-    // void Awake()
-    // {
-    //     DontDestroyOnLoad(transform.gameObject);
-    // }
+
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            Application.Quit();
+        }
+    }
 
     public void GameStart() {
         SceneManager.LoadScene(mainSceneName);
