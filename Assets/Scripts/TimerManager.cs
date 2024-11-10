@@ -11,6 +11,7 @@ public class TimerManager : MonoBehaviour
     [SerializeField] private float totalTime = 60.0f;
 
     [SerializeField] private HoleManager holeManager;
+    [SerializeField] private BackgroundManager backgroundManager;
 
     [SerializeField] private float decayRate;
     [SerializeField] private float updateRate;
@@ -21,6 +22,7 @@ public class TimerManager : MonoBehaviour
     {
         timerBar.fillAmount = 0;
         StartCoroutine(UpdateSpawnRate());
+        StartCoroutine(backgroundManager.OverlapBackground(totalTime));
     }
 
     // Update is called once per frame

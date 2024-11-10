@@ -12,6 +12,7 @@ public class WaterManager : MonoBehaviour
     private HoleManager holeManager;
     [SerializeField] private float inputWater = 0.005f;
     [SerializeField] private float waterLossPerHole = 0.005f;
+    [SerializeField] private float initialWaterAmount = 0f;
 
     private bool waterSoundStartFlag = false;
     private bool waterSoundEndFlag = true;
@@ -22,7 +23,7 @@ public class WaterManager : MonoBehaviour
     void Start()
     {
         holeManager = FindObjectOfType<HoleManager>();
-        waterBar.fillAmount = 1;
+        waterBar.fillAmount = initialWaterAmount;
     }
 
     // Update is called once per frame
