@@ -20,6 +20,10 @@ namespace Spear
             // }
         }
 
+        public void PlaySound() {
+            audioSources[_next].Play();
+        }
+
         public void PlaySound(float volume, bool reset = false)
         {
             if (reset) {
@@ -33,6 +37,10 @@ namespace Spear
                 audioSources[_next].Play();
                 _next = (_next + 1) % audioSources.Count;
             }
+        }
+
+        public void PauseSound() {
+            audioSources[_next].Stop();
         }
 
         public void StopSound() {

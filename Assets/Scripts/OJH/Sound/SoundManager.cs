@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -14,6 +16,8 @@ namespace Spear
         Dictionary<string, SoundPool> soundPoolsByName = new();
 
         private Dictionary<string, AudioSource> backgroundMusicSources = new();
+
+        private List<string> playList = new();
 
         private int prevIndex = -1;
         
@@ -37,6 +41,7 @@ namespace Spear
             if (soundQueuesByName.TryGetValue(name, out SoundQueue soundQueue))
             {
                 soundQueue.PlaySound(volume, reset);
+                playList.Add(name);
             }
             else
             {
@@ -48,10 +53,40 @@ namespace Spear
             if (soundQueuesByName.TryGetValue(name, out SoundQueue soundQueue))
             {
                 soundQueue.StopSound();
+                int find = playList.IndexOf(name);
+                if (find > -1) {
+                    playList.RemoveAt(find);
+                }
             }
             else
             {
                 Debug.Log($"SoundQueue {name} not found!");
+            }
+        }
+
+        public void PauseSoundQueue() {
+            foreach (string s in playList) {
+                if (soundQueuesByName.TryGetValue(s, out SoundQueue soundQueue))
+                {
+                    soundQueue.PauseSound();
+                }
+                else
+                {
+                    Debug.Log($"SoundQueue {s} not found!");
+                }
+            }
+        }
+
+        public void ResumeSoundQueue() {
+            foreach (string s in playList) {
+                if (soundQueuesByName.TryGetValue(s, out SoundQueue soundQueue))
+                {
+                    soundQueue.PlaySound();
+                }
+                else
+                {
+                    Debug.Log($"SoundQueue {s} not found!");
+                }
             }
         }
 

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Spear;
 using UnityEngine;
 
 public class PauseMenu : MonoBehaviour
@@ -28,6 +29,7 @@ public class PauseMenu : MonoBehaviour
         isPaused = true;
         Time.timeScale = 0;
         pauseWindow.SetActive(true);
+        SoundManager.Instance.PauseSoundQueue();
     }
 
     public void Resume()
@@ -35,5 +37,6 @@ public class PauseMenu : MonoBehaviour
         isPaused = false;
         Time.timeScale = 1;
         pauseWindow.SetActive(false);
+        SoundManager.Instance.ResumeSoundQueue();
     }
 }
