@@ -9,6 +9,15 @@ public class CursorController : MonoBehaviour
 { 
     [SerializeField] private HoleManager holeManager;
     [SerializeField] private float clickDistanceThreshold;
+
+    [SerializeField] private Sprite cursorSprite1;
+    [SerializeField] private Sprite cursorSprite2;
+
+    [SerializeField] private float cursorUpdateRate;
+    [SerializeField] private UnityEngine.Vector2 offset;
+    private float _time;
+    private bool _toggleCursor;
+    
     private void Update()
     {
         if (Input.GetMouseButtonDown(0) && !PauseMenu.isPaused)
@@ -38,5 +47,31 @@ public class CursorController : MonoBehaviour
                 closestHole.GetComponent<HoleController>().DestroyWithAnimation();
             }
         }
+        if (_time > cursorUpdateRate)
+        {
+            SwapCursor();
+            _time = 0f;
+        }
+
+        _time += Time.deltaTime;
+    }
+
+    private void SwapCursor()
+    {
+        if (_toggleCursor)
+        {
+            Cursor.SetCursor(cursorSprite2.texture, offset, CursorMode.Auto);
+            _toggleCursor = !_toggleCursor;
+        }
+        else
+        {
+            Cursor.SetCursor(cursorSprite1.texture, offset, CursorMode.Auto);
+            _toggleCursor = !_toggleCursor;
+        }
+    }
+
+    private void Start()
+    {
+        Cursor.SetCursor(cursorSprite1.texture, UnityEngine.Vector2.zero, CursorMode.Auto);
     }
 }
