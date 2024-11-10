@@ -20,4 +20,5 @@
 ## :books: Documentation
 
 - [기획 문서](https://docs.google.com/document/d/1P-IYd2P-Njn2yxD-D3eAH834R74KXL0fOGVLLBrT3bk/edit?tab=t.0)
+- [UI 디자인](https://www.figma.com/design/ZaR2qwm5IKs7S1Px0KorVF/kongjiX?node-id=48-60&t=717VdpaQGwnWmo1I-1)
 
