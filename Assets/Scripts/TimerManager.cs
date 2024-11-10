@@ -8,7 +8,7 @@ public class TimerManager : MonoBehaviour
 {
     public Image timerBar;
 
-    [SerializeField] private float totalTime = 60.0f;
+    [SerializeField] public float TotalTime = 60.0f;
 
     [SerializeField] private HoleManager holeManager;
     [SerializeField] private BackgroundManager backgroundManager;
@@ -22,7 +22,8 @@ public class TimerManager : MonoBehaviour
     {
         timerBar.fillAmount = 0;
         StartCoroutine(UpdateSpawnRate());
-        StartCoroutine(backgroundManager.OverlapBackground(totalTime));
+        StartCoroutine(backgroundManager.OverlapBackground(TotalTime));
+        // StartCoroutine(backgroundManager.OverlapSunMoon(totalTime));
     }
 
     // Update is called once per frame
@@ -36,7 +37,7 @@ public class TimerManager : MonoBehaviour
 
     private void UpdateTimer()
     {
-        if (timerBar.fillAmount < 1) { timerBar.fillAmount += Time.deltaTime / totalTime; }
+        if (timerBar.fillAmount < 1) { timerBar.fillAmount += Time.deltaTime / TotalTime; }
         else { GameObject.FindObjectOfType<ClearManager>().CheckClear(); }
     }
 
