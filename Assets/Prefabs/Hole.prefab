@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ff481ea5c4fb104d9eee30631b9bf57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeDuration: 3
+  fadeDuration: 1
   blockedSprite: {fileID: 21300000, guid: 6f7162f99ec07344e8e733c340fabadc, type: 3}
   blockedEmptySprite: {fileID: 21300000, guid: e33f156d34e311144b159c7ede612cd1, type: 3}
   waterSprite1: {fileID: 21300000, guid: 746b274a2ab836e4c9684599819f9ad7, type: 3}
