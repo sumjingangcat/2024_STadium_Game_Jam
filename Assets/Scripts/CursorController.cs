@@ -40,7 +40,6 @@ public class CursorController : MonoBehaviour
                 }
             }
             
-            Debug.Log("minDis: " + minDis);
             // Destroy closest hole from cursor
             if (closestHole && minDis < clickDistanceThreshold)
             {

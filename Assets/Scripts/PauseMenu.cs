@@ -23,14 +23,14 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
-    private void Pause()
+    public void Pause()
     {
         isPaused = true;
         Time.timeScale = 0;
         pauseWindow.SetActive(true);
     }
 
-    private void Resume()
+    public void Resume()
     {
         isPaused = false;
         Time.timeScale = 1;
