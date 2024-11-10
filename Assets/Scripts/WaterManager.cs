@@ -32,7 +32,7 @@ public class WaterManager : MonoBehaviour
     {
         waterBar.fillAmount += inputWater * Time.deltaTime;
 
-        if (waterBar.fillAmount > 0) { waterBar.fillAmount -= holeManager.holes.Count * waterLossPerHole * Time.deltaTime; }
+        if (waterBar.fillAmount > 0) { waterBar.fillAmount -= holeManager.activeHoles.Count * waterLossPerHole * Time.deltaTime; }
         else { Debug.Log("Zero"); }
     }
 }

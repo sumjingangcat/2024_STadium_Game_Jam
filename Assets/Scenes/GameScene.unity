@@ -1232,9 +1232,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   potObject: {fileID: 1256829480}
+  waterManager: {fileID: 1226491828}
   holes: []
+  activeHoles: []
   maximumTime: 5
   minimumTime: 2
+  validateRate: 0.5
   holeObject: {fileID: 5794946335958527400, guid: cf140bece4088b148b12b1f2caeb83a1, type: 3}
 --- !u!4 &1931948491
 Transform:

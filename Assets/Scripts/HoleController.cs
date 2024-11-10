@@ -8,8 +8,10 @@ public class HoleController : MonoBehaviour
     [SerializeField] private float fadeDuration;
 
     [Header("Sprites")] [SerializeField] private Sprite blockedSprite;
+    [SerializeField] private Sprite blockedEmptySprite;
     [SerializeField] private Sprite waterSprite1;
     [SerializeField] private Sprite waterSprite2;
+    [SerializeField] private Sprite emptySprite;
     [SerializeField] private Vector3 spriteScale;
     [SerializeField] private bool isWater1;
 
@@ -19,6 +21,14 @@ public class HoleController : MonoBehaviour
     [SerializeField] private SpriteRenderer _mySpriteRenderer;
 
     private bool isBlocked;
+    private bool isEmpty;
+
+    public enum SpriteType
+    {
+        EmptyHole,
+        Hole,
+        BlockedHole
+    }
     
     void Start()
     {
@@ -44,7 +54,7 @@ public class HoleController : MonoBehaviour
 
     private void SwapSprite()
     {
-        if (isBlocked)
+        if (isBlocked || isEmpty)
         {
             return;
         }
@@ -64,13 +74,42 @@ public class HoleController : MonoBehaviour
     {
         isBlocked = true;
         GameObject.Find("HoleManager").GetComponent<HoleManager>().holes.Remove(gameObject);
-        ChangeSprite();
+        ChangeSprite(SpriteType.BlockedHole);
         StartCoroutine(FadeAnimation());
     }
 
-    private void ChangeSprite()
+    public void ChangeSprite(SpriteType type)
     {
-        _mySpriteRenderer.sprite = blockedSprite;
+        Sprite newSprite = null;
+        switch (type)
+        {
+            case SpriteType.Hole:
+                newSprite = waterSprite1;
+                break;
+            case SpriteType.BlockedHole:
+                if (isEmpty)
+                {
+                    newSprite = blockedEmptySprite;
+                }
+                else
+                {
+                    newSprite = blockedSprite;   
+                }
+                break;
+            case SpriteType.EmptyHole:
+                newSprite = emptySprite;
+                break;
+        }
+
+        if (newSprite)
+        {
+            _mySpriteRenderer.sprite = newSprite;   
+        }
+    }
+
+    public void SetEmpty(bool empty)
+    {
+        isEmpty = empty;
     }
 
     IEnumerator FadeAnimation()
