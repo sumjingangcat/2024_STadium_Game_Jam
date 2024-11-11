@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Spear;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -30,6 +31,8 @@ public class BackgroundManager : MonoBehaviour {
         moonAngle = rotationStartAngle;
 
         dividedTime = timerManager.TotalTime / 2;
+        
+        SoundManager.Instance.PlayBGM("chicken");
     }
     
     public IEnumerator OverlapBackground(float totalTime) {
@@ -42,6 +45,8 @@ public class BackgroundManager : MonoBehaviour {
         
         backgrounds[2].gameObject.SetActive(true);
         StartCoroutine(smoothAlphaRender(backgrounds[2], dividedTime * 0.25f, 0, 1));
+        yield return new WaitForSeconds(dividedTime * 0.25f);
+        SoundManager.Instance.PlayBGM("cricket");
     }
     
     private IEnumerator smoothAlphaRender(SpriteRenderer sr, float duration, float fromA, float toA) {

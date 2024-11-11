@@ -1,22 +1,30 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Spear;
 using UnityEngine;
 using UnityEngine.Serialization;
-using Vector2 = System.Numerics.Vector2;
 
 public class CursorController : MonoBehaviour
 { 
     [SerializeField] private HoleManager holeManager;
     [SerializeField] private float clickDistanceThreshold;
 
-    [SerializeField] private Sprite cursorSprite1;
-    [SerializeField] private Sprite cursorSprite2;
+    [SerializeField] private Texture2D cursorTexture1;
+    [SerializeField] private Texture2D cursorTexture2;
+    
+    [SerializeField] private Texture2D cursorTextureWeb1;
+    [SerializeField] private Texture2D cursorTextureWeb2;
+
+    [SerializeField] private int textureWebSize = 16;
+    [SerializeField] private int textureWindowSize = 64;
 
     [SerializeField] private float cursorUpdateRate;
-    [SerializeField] private UnityEngine.Vector2 offset;
+    [SerializeField] private Vector2 offsetWindow;
+    [SerializeField] private Vector2 offsetWeb;
     private float _time;
     private bool _toggleCursor;
+    
     
     private void Update()
     {
@@ -44,6 +52,7 @@ public class CursorController : MonoBehaviour
             if (closestHole && minDis < clickDistanceThreshold)
             {
                 closestHole.GetComponent<HoleController>().DestroyWithAnimation();
+                SoundManager.Instance.PlaySoundQueue("frog-sound", true);
             }
         }
         if (_time > cursorUpdateRate)
@@ -59,18 +68,34 @@ public class CursorController : MonoBehaviour
     {
         if (_toggleCursor)
         {
-            Cursor.SetCursor(cursorSprite2.texture, offset, CursorMode.Auto);
+#if UNITY_WEBGL
+            Cursor.SetCursor(cursorTextureWeb2, offsetWeb, CursorMode.ForceSoftware);
+#else
+            Cursor.SetCursor(cursorTexture2, offsetWindow, CursorMode.Auto);
+#endif
             _toggleCursor = !_toggleCursor;
         }
         else
         {
-            Cursor.SetCursor(cursorSprite1.texture, offset, CursorMode.Auto);
+#if UNITY_WEBGL
+            Cursor.SetCursor(cursorTextureWeb1, offsetWeb, CursorMode.ForceSoftware);
+#else
+            Cursor.SetCursor(cursorTexture1, offsetWindow, CursorMode.Auto);
+#endif
             _toggleCursor = !_toggleCursor;
         }
     }
 
     private void Start()
     {
-        Cursor.SetCursor(cursorSprite1.texture, UnityEngine.Vector2.zero, CursorMode.Auto);
+#if UNITY_WEBGL
+        // cursorTexture1.Reinitialize(textureWebSize, textureWebSize);
+        // cursorTexture2.Reinitialize(textureWebSize, textureWebSize);
+        Cursor.SetCursor(cursorTextureWeb1, Vector2.zero, CursorMode.ForceSoftware);
+#else
+        // cursorTexture1.Reinitialize(textureWindowSize, textureWindowSize);
+        // cursorTexture2.Reinitialize(textureWindowSize, textureWindowSize);
+        Cursor.SetCursor(cursorTexture1, UnityEngine.Vector2.zero, CursorMode.Auto);
+#endif
     }
 }

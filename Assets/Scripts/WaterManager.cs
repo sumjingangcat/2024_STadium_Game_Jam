@@ -24,6 +24,8 @@ public class WaterManager : MonoBehaviour
     {
         holeManager = FindObjectOfType<HoleManager>();
         waterBar.fillAmount = initialWaterAmount;
+        
+        
     }
 
     // Update is called once per frame
